@@ -1,4 +1,5 @@
 export interface User {
+  name: string;
   email: string;
   password: string;
 }
@@ -7,8 +8,9 @@ const db:User[] = []
 
 export class UserService {
 
-  createUser = (email: string, password: string) => {
+  createUser = (name: string, email: string, password: string) => {
     const user = {
+      name,
       email,
       password
     }
@@ -19,4 +21,13 @@ export class UserService {
   getAllUsers = () =>{
     return db;
   }
+
+  deleteUser = (email:string) =>{
+   const userIndex = db.findIndex(user => user.email == email)
+    if(userIndex > -1){
+      db.splice(userIndex, 1)
+    }
+   }
+    
+  
 }
